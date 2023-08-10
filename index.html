@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+	<style type="text/css">
+		*{
+margin:0px;
+padding: 0px;
+box-sizing: border-box;
+		}
+		
+
+		#game{
+width: 390px;
+height: 500px;
+background-image: url(spacebg.png);
+			overflow: hidden;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			flex-direction: column;
+			position: ;
+			text-align: center;
+		}
+		#player{
+position: absolute;
+top: 350px;
+left:0px ;
+text-align: center;
+}
+#alien{
+	width: 130px;
+    height: auto;
+	text-align: center;
+	overflow: hidden;
+position: absolute;
+left:0px ;
+top:0px ;
+text-align: center;
+
+}
+.alienclass{
+	overflow: hidden;
+	animation: come 1s linear infinite forwards;
+}
+@keyframes come{
+0%{
+
+top: -52px;
+
+}
+100%{
+
+top: 570px;
+
+}
+
+
+
+
+
+
+}
+
+		
+#player img{
+	width: 100px;
+	height: auto;
+}
+#alien img{
+	width: 100px;
+	height: auto;
+}
+#button{
+
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+}
+#right{
+border-radius: 50%;
+	padding: 32px;
+	background-color: rgba(3454, 53, 535, 533);
+	color: white;
+	font-weight: bold;
+}
+#right:hover{
+
+	background-color: firebrick;
+
+}
+#left:hover{
+
+	background-color: firebrick;
+}
+
+#fire:hover{
+
+	background-color: gainsboro;
+}
+#left{
+border-radius: 50%;
+margin-left: 22px;
+	padding: 32px;
+	background-color: rgba(3454, 53, 55, 53);
+
+}
+
+#fire{
+border-radius: 30%;
+	padding: 32px;
+	background-color: orange;
+}
+.bullet{
+
+width: 100px;
+height: auto;
+position: absolute;
+top: 370px;
+left:0px ;
+text-align: center;
+animation: cool 1s linear 1 forwards;
+}
+.bulletimg{
+text-align: center;
+width: 100px;
+height: auto;
+
+}
+@keyframes cool{
+0%{
+top: 370px;
+
+}
+100%{
+top: -110px;
+
+}
+
+
+}
+
+#result{
+	width: 411px;
+	display: none;
+	font-size: 22px;
+	font-weight: bold;
+	color: currentColor;
+	background-color: pink;
+}
+#btn{
+	width: 211px;
+	
+	font-size: 22px;
+	font-weight: bold;
+	color: currentColor;
+	background-color:azure;
+}
+#r{
+	color: red;
+
+	width: 411px;
+	height: 11px;
+	font-size: 33px;
+	font-weight: bold;
+	
+	
+	
+	</style>
+
+
+</head>
+<body>
+<div id="game">
+	<div id="player"><img src="try.png"></div>
+
+<div id="alien"><img src="alien.png"></div>
+
+
+</div>
+
+<button id="left">LEFT</button>
+<button id="fire">FIRE</button>
+<button id="right">RIGHT</button>
+</div>
+
+
+
+
+<div id="result">
+	<h1>GAMEOVER</h1>
+<button id="btn" onclick="location.reload()">RESTART</button>
+
+</div>
+<div id="r">
+	<p>score</p>
+</div>
+
+
+
+
+<script type="text/javascript">
+	
+
+//player controls
+var t=document.body;
+var r=document.getElementById("r");
+var btn=document.getElementById("btn");
+var button=document.getElementById("button");
+var result=document.getElementById("result");
+var alien=document.getElementById("alien");
+var game=document.getElementById("game");
+var fire=document.getElementById("fire");
+var left=document.getElementById("left");
+var player=document.getElementById("player");
+var right=document.getElementById("right");
+var u=document.getElementById("u");
+var counter=0;
+right.addEventListener("click",function(){
+var rightplayer=parseInt(window.getComputedStyle(player).getPropertyValue("left"))
+	if(rightplayer<254){ player.style.left=(rightplayer+130)+"px"
+}
+});
+
+//left controll
+
+left.addEventListener("click",function(){
+var rightplayer=parseInt(window.getComputedStyle(player).getPropertyValue("left"))
+	if(rightplayer>0){ player.style.left=(rightplayer-130)+"px"
+}
+});
+
+
+
+
+// main fire
+fire.addEventListener("click",function(){
+var a=document.createElement("div");
+var b=document.createElement("img");
+b.src="fire.png"
+a.classList.add("bullet");
+b.classList.add("bulletimg");
+a.appendChild(b);
+a.style.left=player.style.left
+game.appendChild(a);
+
+
+
+
+//
+//if (((canonTop - alienTop) < 100) && (alienTop < canonTop)
+                //&& (alienLeft === canonLeft))
+setInterval(function abc(){
+	
+var atop=parseInt(window.getComputedStyle(a).getPropertyValue("top"))
+var aleft=parseInt(window.getComputedStyle(a).getPropertyValue("left"))
+var aleantop=parseInt(window.getComputedStyle(alien).getPropertyValue("top"))
+var aleanleft=parseInt(window.getComputedStyle(alien).getPropertyValue("left"))
+if (((atop-aleantop)<100)&&(aleantop<atop)&&(aleft===aleanleft)) {
+	alien.style.display = 'none';
+	a.style.display = 'none';
+	r.innerText=`score=${counter}`
+	
+}
+
+
+
+
+
+
+
+
+},10);
+
+
+})
+//
+function alienmove(){
+alien.style.display = 'block';
+var p=((Math.floor(Math.random()*3))*130);
+
+alien.style.left=p+"px"
+alien.classList.add("alienclass");
+counter++
+
+}
+
+
+setInterval(alienmove,1000)
+
+function yes(){
+	var aleantop=parseInt(window.getComputedStyle(alien).getPropertyValue("top"))
+if(aleantop>400){
+	game.style.display="none";
+
+	result.style.display="block"
+right.style.display="none"
+left.style.display="none";
+fire.style.display="none";
+r.innerText=`score=${counter}`
+t.src="spacebg.png"
+r.style.display="block"
+}
+
+
+}
+setInterval(yes,10);
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
